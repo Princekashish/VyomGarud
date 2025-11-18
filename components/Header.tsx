@@ -1,10 +1,17 @@
 "use client"
-// components/Header.tsx
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 
-export default function Header(){
+const navbar = [
+  { text: "About", link: "/" },
+  { text: "Capabilities", link: "/" },
+  { text: "Blog", link: "/blog" },
+  { text: "Contact", link: "/" },
+]
+
+
+export default function Header() {
   const [open, setOpen] = useState(false);
 
   const containerVariants: Variants = {
@@ -40,13 +47,14 @@ export default function Header(){
       className="sticky top-0 z-50 w-full "
       aria-label="Primary"
     >
-      {/* Glass container */}
+  
       <div
         className="md:py-6  backdrop-blur-lg 
                    shadow-xs px-4 md:px-6 py-4 flex items-center justify-between gap-3"
         role="navigation"
       >
-        {/* Left: Brand */}
+        
+       <Link href={"/"}>
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-lg flex items-center justify-center
@@ -68,26 +76,27 @@ export default function Header(){
             vyomgarud
           </motion.span>
         </div>
+        </Link>
 
-        {/* Center / Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 text-sm text-white/85">
-          {["About", "Capabilities", "Highlights", "Contact"].map((label, i) => (
-            <motion.a
-              key={label}
-              href={`#${label.toLowerCase()}`}
-              custom={i}
-              initial="hidden"
-              animate="visible"
-              variants={navItemVariants}
-              className="relative px-2 py-1 hover:text-white transition"
-            >
-              {label}
-              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#ff7b00] transition-all group-hover:w-full" />
-            </motion.a>
+        
+        <nav className="hidden md:flex items-center gap-6 text-sm text-white/85 ">
+          {navbar.map((label, i) => (
+            <Link key={i} href={label.link} className="outline-none ">
+              <motion.p
+                custom={i}
+                initial="hidden"
+                animate="visible"
+                variants={navItemVariants}
+                className={`relative px-2 py-1 hover:text-white transition outline-none ${i===2 ? "text-red-500":""}`}
+              >
+                {label.text}
+                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#ff7b00] transition-all group-hover:w-full" />
+              </motion.p>
+            </Link>
           ))}
         </nav>
 
-        {/* Right actions */}
+      
         <div className="flex items-center gap-3">
           <motion.a
             href="#contact"
@@ -102,7 +111,7 @@ export default function Header(){
             <span>Get in touch</span>
           </motion.a>
 
-          {/* Mobile hamburger */}
+           
           <button
             onClick={() => setOpen((s) => !s)}
             aria-expanded={open}
@@ -110,23 +119,23 @@ export default function Header(){
             className="inline-flex md:hidden items-center justify-center rounded-full p-2 focus:outline-none"
             title="Menu"
           >
-           <div className="flex flex-col gap-1">
-           <motion.span
-              initial={false}
-              animate={open ? { rotate: -45, y: 1 } : { rotate: 0, y: 0 }}
-              className="block w-5 h-0.5 bg-white"
-            />
-            <motion.span
-              initial={false}
-              animate={open ? { rotate: 45, y: 1 } : { rotate: 0, y: 0 }}
-              className="block w-5 h-0.5 bg-white"
-            />
-           </div>
+            <div className="flex flex-col gap-1">
+              <motion.span
+                initial={false}
+                animate={open ? { rotate: -45, y: 1 } : { rotate: 0, y: 0 }}
+                className="block w-5 h-0.5 bg-white"
+              />
+              <motion.span
+                initial={false}
+                animate={open ? { rotate: 45, y: 1 } : { rotate: 0, y: 0 }}
+                className="block w-5 h-0.5 bg-white"
+              />
+            </div>
             <span className="sr-only">{open ? "Close" : "Open"} menu</span>
           </button>
         </div>
 
-        {/* Mobile menu (animated panel) */}
+ 
         <motion.div
           initial={{ opacity: 0, scale: 0.98, height: 0 }}
           animate={open ? { opacity: 1, scale: 1, height: "auto" } : { opacity: 0, scale: 0.98, height: 0 }}
@@ -134,7 +143,7 @@ export default function Header(){
           className="absolute left-4 right-4 top-[72px] rounded-2xl bg-[rgba(8,10,12,0.72)] backdrop-blur-lg border border-white/6 shadow-lg md:hidden overflow-hidden"
         >
           <div className="flex flex-col gap-1 py-3 px-4">
-            {["About", "Capabilities", "Highlights", "Contact"].map((label) => (
+            {["About", "Capabilities", "Blog", "Contact"].map((label) => (
               <a
                 key={label}
                 href={`#${label.toLowerCase()}`}
