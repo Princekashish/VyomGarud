@@ -1,15 +1,14 @@
 import { BLOG_POSTS } from "@/blog";
-import { Heart, Share2, ThumbsUp } from "lucide-react";
-import { Share } from "next/font/google";
+import { Heart, Share2} from "lucide-react";
 
 type Props = {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 };
 
 const SingleBlog = async ({ params }: Props) => {
-  const { slug } = await params;
+  const { slug } =await params;
 
   const blog = BLOG_POSTS.find((post) => post.slug === slug);
 

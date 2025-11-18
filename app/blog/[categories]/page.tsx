@@ -1,5 +1,3 @@
-
-import React from "react";
 import AnimatedGrid, { SimplePost } from "@/components/AnimatedGrid";
 import { BLOG_POSTS } from "@/blog";
 
@@ -41,8 +39,6 @@ export default async function CategoryPage({ params }: Props) {
   const normalizedSlug = slugify(decoded);
   const filtered = BLOG_POSTS.filter((p) => slugify(p.category) === normalizedSlug);
   const pretty = filtered.length > 0 ? filtered[0].category : decoded.replace(/-/g, " ");
-
-  // include category slug so client can build full URLs
   const clientPosts: SimplePost[] = filtered.map((p) => ({
     id: p.id,
     title: p.title,
@@ -51,7 +47,7 @@ export default async function CategoryPage({ params }: Props) {
     readTime: p.readTime,
     author: p.author,
     thumbnail: p.thumbnail,
-    category: normalizedSlug, 
+    category: normalizedSlug,
   }));
 
   return (
