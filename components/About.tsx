@@ -2,17 +2,6 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 
-/**
- * Single-file About component:
- * - full-screen hero-like section
- * - large centered headline (multi-line)
- * - outlined pill CTA like the screenshot
- * - entrance animations + button hover/tap
- *
- * Make sure Tailwind is configured and framer-motion is installed:
- * npm i framer-motion
- */
-
 const container: Variants = {
   hidden: { opacity: 0, y: 10 },
   show: {
@@ -52,7 +41,7 @@ export default function About() {
       animate="show"
     >
       <div className="w-full max-w-5xl text-center">
-        {/* Big headline - split lines to match screenshot rhythm */}
+
         <motion.h1
           variants={headingVariant}
           className="font-[Poppins],sans-serif font-extrabold text-4xl md:text-[clamp(28px,6vw,64px)] leading-[1.02] md:text- md:leading-[1.02] tracking-tight"
@@ -63,12 +52,11 @@ export default function About() {
           <span className="block text-white/80">security, and operational excellence.</span>
         </motion.h1>
 
-        {/* small spacer */}
         <motion.p variants={subtextVariant} className="mt-8 text-white/60 max-w-3xl mx-auto text-sm md:text-lg">
           VyomGarud delivers cutting-edge autonomous UAV systems designed for the most demanding operational environments.
         </motion.p>
 
-        {/* CTA */}
+   
         <motion.div variants={btnVariants} className="mt-12 flex justify-center gap-5" >
           <motion.button
             whileHover="hover"
@@ -78,7 +66,7 @@ export default function About() {
                        transition-shadow focus:outline-none focus:ring-2 focus:ring-white/10"
             aria-label="Our vision"
           >
-            {/* Inner glow / subtle background on hover is done via pseudo-classes in Tailwind; we keep button simple */}
+
             Precision <span className="hidden md:block"> Engineering</span>
           </motion.button>
           <motion.button
@@ -89,7 +77,6 @@ export default function About() {
                        transition-shadow focus:outline-none focus:ring-2 focus:ring-white/10"
             aria-label="Our vision"
           >
-            {/* Inner glow / subtle background on hover is done via pseudo-classes in Tailwind; we keep button simple */}
             Advanced <span className="hidden md:block">Autonomy</span>
           </motion.button>
         </motion.div>

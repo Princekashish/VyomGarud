@@ -1,4 +1,3 @@
-// components/Highlights.tsx
 "use client";
 import React from "react";
 import { motion, Variants } from "framer-motion";
@@ -51,7 +50,6 @@ const STATS: Stat[] = [
   },
 ];
 
-// Typed Framer Motion variants
 const containerVariants: Variants = {
   hidden: {},
   show: {
@@ -85,13 +83,12 @@ export default function Highlights() {
   return (
     <section className="w-full bg-[#0b0b0c] text-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* header */}
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Why Choose VyomGarud</h2>
           <p className="mt-3 text-white/70 max-w-2xl mx-auto">Key performance metrics that set us apart</p>
         </div>
 
-        {/* grid */}
+
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:px-28"
           variants={containerVariants}
@@ -104,18 +101,7 @@ export default function Highlights() {
               key={s.title}
               variants={cardVariants}
               whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.6)" }}
-              className="
-  relative rounded-2xl 
-  p-8 min-h-[240px] flex flex-col
-  bg-black/50
-  backdrop-blur-xl 
-  border border-white/20 
-  shadow-[0_8px_32px_rgba(0,0,0,0.4)]
-  hover:shadow-[0_20px_50px_rgba(0,0,0,0.55)]
-  transition-all duration-300
-"
-
-            >
+              className=" relative rounded-2xl p-8 min-h-60 flex flex-col bg-black/50 backdrop-blur-xl  border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 ">
               <div className="flex flex-col  items-start gap-4">
                 <div className="flex-none w-12 h-12 rounded-lg bg-white/6 flex items-center justify-center shadow-xl text-[#ff7b00]">
                   {s.icon}
@@ -133,7 +119,6 @@ export default function Highlights() {
                   whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center px-4 py-2 rounded-full border border-white/20 text-white/90 text-sm font-medium backdrop-blur-sm bg-white/10"
                   onClick={() => {
-                    // placeholder action
                     window.alert(`${s.title} — ${s.cta ?? "Learn more"}`);
                   }}
                 >

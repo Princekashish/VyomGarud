@@ -25,7 +25,7 @@ const card: Variants = {
   show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
-/** Slugify to keep URLs consistent with server */
+
 function slugify(input = "") {
   return String(input || "")
     .toLowerCase()
@@ -36,7 +36,7 @@ function slugify(input = "") {
 }
 
 
-/** Local dev fallback image (optional) */
+
 const DEV_FALLBACK = "/placeholder-post.png";
 
 export default function AnimatedGrid({ posts }: { posts: SimplePost[] }) {
@@ -77,7 +77,7 @@ export default function AnimatedGrid({ posts }: { posts: SimplePost[] }) {
               />
             </div>
 
-            {/* content */}
+     
             <div className="p-5 flex flex-col gap-3 flex-1">
               <h3 className="text-lg md:text-xl font-semibold text-white leading-tight">{p.title}</h3>
 

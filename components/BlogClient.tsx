@@ -39,7 +39,6 @@ export default function BlogClient({ posts, categories }: BlogClientProps) {
 
   return (
     <main>
-      {/* Pass setSearchQuery to BlogHero */}
       <BlogHero onSearch={(q) => setSearchQuery(q)} />
 
       <section className="max-w-7xl mx-auto p-6">

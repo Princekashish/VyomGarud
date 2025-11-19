@@ -91,16 +91,15 @@ export default function Header() {
                     variants={navItemVariants}
                     className="relative flex top-0 items-center gap-2 px-2 py-1 hover:text-white transition"
                   >
-                    {/* Blinking Dot */}
+               
                     <span className="relative flex size-3">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
-                      <span className="relative inline-flex size-3 rounded-full bg-red-300"></span>
+                      <span className="relative inline-flex size-3 rounded-full bg-red-600"></span>
                     </span>
 
-                    {/* Blog Text */}
                     <span className="font-semibold">{label.text}</span>
 
-                    {/* NEW Badge */}
+                 
                     <span className="px-2 py-0.5 text-xs rounded-full bg-white text-black font-semibold">
                       new
                     </span>

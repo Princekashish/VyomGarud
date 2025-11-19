@@ -20,7 +20,7 @@ const initialState: FormState = {
   fleetSize: "",
 };
 
-// Motion variants
+
 const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08 } },
@@ -52,7 +52,7 @@ export default function GetInTouchRef() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      // simulate API
+     
       await new Promise((r) => setTimeout(r, 900));
       setSent(true);
       setForm(initialState);
@@ -67,7 +67,7 @@ export default function GetInTouchRef() {
   return (
     <section className="w-full bg-[#070809] text-white py-16 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        {/* Left column - marketing */}
+       
         <motion.div
           className="space-y-6"
           initial="hidden"
@@ -99,7 +99,6 @@ export default function GetInTouchRef() {
           </motion.ul>
         </motion.div>
 
-        {/* Right column - form card */}
         <motion.div
           className="rounded-2xl bg-black/20 text-black p-6 border border-white/40 shadow-md"
           initial="hidden"

@@ -7,7 +7,7 @@ type Feature = {
   subtitle?: string;
   desc: string;
   cta: string;
-  filled?: boolean; // filled (orange) button on right card
+  filled?: boolean; 
 };
 
 const FEATURES: Feature[] = [
@@ -45,7 +45,7 @@ const FEATURES: Feature[] = [
 
 ];
 
-// Variants (typed)
+
 const containerVariants: Variants = {
   hidden: {},
   show: {
@@ -91,7 +91,7 @@ export default function ProductPromo() {
               }
               aria-labelledby={`card-${i}-title`}
             >
-              {/* decorative faint arcs via SVG in the card background */}
+
               <svg
                 aria-hidden
                 className="absolute -left-24 -bottom-24 opacity-6 w-[900px] h-[900px] pointer-events-none"
@@ -113,7 +113,6 @@ export default function ProductPromo() {
                 </div>
 
                 <div className="mt-auto">
-                  {/* CTA - left is outline, right is filled orange */}
                   {f.filled ? (
                     <button
                       onClick={() => alert(`${f.title} — ${f.cta}`)}
@@ -132,7 +131,7 @@ export default function ProductPromo() {
                 </div>
               </div>
 
-              {/* subtle inner border highlight */}
+              
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-2xl border border-white/3 mix-blend-overlay opacity-5"

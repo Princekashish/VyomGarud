@@ -17,10 +17,10 @@ export default function Footer() {
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="max-w-7xl mx-auto px-6 py-14"
       >
-        {/* Top Section */}
+ 
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
 
-          {/* Brand */}
+         
           <div>
             <h2 className="text-2xl font-bold tracking-tight">VyomGarud</h2>
             <p className="text-white/60 mt-2 max-w-sm">
@@ -28,7 +28,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
+      
           <div className="flex gap-14 text-center md:text-left">
             <div className="flex flex-col gap-3">
               <h4 className="font-semibold text-white/90">Company</h4>

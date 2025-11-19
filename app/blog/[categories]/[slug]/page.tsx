@@ -2,14 +2,14 @@ import { Heart, Share2 } from "lucide-react";
 
 type Props = {
   params: {
-    slug: string; // URL slug for the post
+    slug: string; 
   };
 };
 
 const STRAPI = process.env.STRAPI_BASE_URL ?? "http://127.0.0.1:1337";
 const TOKEN = process.env.STRAPI_API_TOKEN;
 
-// Fetch a single post by slug from Strapi
+
 async function fetchPostBySlug(slug: string) {
   const res = await fetch(`${STRAPI}/api/posts?filters[slug][$eq]=${slug}&populate=*`, {
     headers: { Authorization: `Bearer ${TOKEN}` },
@@ -20,7 +20,7 @@ async function fetchPostBySlug(slug: string) {
   const data = json.data[0];
   if (!data) return null;
 
-  // Map Strapi attributes to a usable format
+
   const post = data.attributes
     ? {
       id: data.id,
@@ -116,7 +116,7 @@ const SingleBlog = async ({ params }: Props) => {
 
       {blog.thumbnail && (
         <img
-          src={`${blog.thumbnail.url}`} // make sure it's absolute
+          src={`${blog.thumbnail.url}`} 
           alt={blog.title}
           className="w-full rounded-lg mb-8 object-cover h-96"
         />

@@ -1,4 +1,3 @@
-// components/Categories.tsx
 "use client";
 
 import Link from "next/link";
@@ -16,9 +15,9 @@ type Post = {
 };
 
 interface CategoriesProps {
-    title: string;             // Category name
-    posts: Post[];             // All posts
-    searchQuery?: string;      // Optional search string
+    title: string;            
+    posts: Post[];             
+    searchQuery?: string;      
 }
 
 const container: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };

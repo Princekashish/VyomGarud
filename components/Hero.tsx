@@ -5,18 +5,18 @@ import { motion } from "framer-motion";
 export default function Hero() {
   const headline = "Military grade UAV systems";
 
-  // Turn text into characters but keep normal spaces (NBSP) so layout doesn't collapse
+ 
   const chars = useMemo(
     () => Array.from(headline).map((c) => (c === " " ? "\u00A0" : c)),
     [headline]
   );
 
-  // animation timing
-  const charDelay = 0.03; // seconds between characters
+
+  const charDelay = 0.03; 
 
   return (
     <section className="md:h-screen h-[80vh] w-full overflow-hidden bg-black ">
-      {/* Video background */}
+
       <video
         className="absolute inset-0 w-auto min-w-full min-h-full h-auto object-cover hidden sm:block"
         src="/drone2.mp4"
@@ -36,10 +36,9 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Optional gradient overlay to improve text contrast */}
       <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black/90 pointer-events-none" />
 
-      {/* Hero content */}
+  
       <div className="relative z-10 max-w-7xl mx-auto  h-[80vh] px-6  flex items-center justify-center md:justify-start">
         <div className="text-[#FFF8F0] flex justify-center items-center flex-col">
           <h1
@@ -75,7 +74,7 @@ export default function Hero() {
               Military grade UAV systems
             </h1>
           <div className="mt-6 flex gap-2">
-            {/* Button #1 */}
+          
             <motion.button
               initial={{ opacity: 0, y: 25, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -88,8 +87,7 @@ export default function Hero() {
               Request a demo
             </motion.button>
 
-            {/* Button #2 */}
-            <motion.button
+             <motion.button
               initial={{ opacity: 0, y: 25, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
