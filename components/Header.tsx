@@ -47,56 +47,87 @@ export default function Header() {
       className="sticky top-0 z-50 w-full "
       aria-label="Primary"
     >
-  
+
       <div
         className="md:py-6  backdrop-blur-lg 
                    shadow-xs px-4 md:px-6 py-4 flex items-center justify-between gap-3"
         role="navigation"
       >
-        
-       <Link href={"/"}>
-        <div className="flex items-center gap-3">
-          <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center
-                       bg-linear-to-br from-black/20 to-white/2 border border-white/5"
-            aria-hidden
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="block">
-              <path d="M12 2L15 9H9L12 2Z" fill="#ff7b00" />
-              <path d="M4 15L12 22L20 15" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
 
-          <motion.span
-            className="text-lg md:text-3xl font-semibold select-none"
-            initial={{ opacity: 0, x: -6 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            vyomgarud
-          </motion.span>
-        </div>
+        <Link href={"/"}>
+          <div className="flex items-center gap-3">
+            <div
+              className="w-10 h-10 rounded-lg flex items-center justify-center
+                       bg-linear-to-br from-black/20 to-white/2 border border-white/5"
+              aria-hidden
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="block">
+                <path d="M12 2L15 9H9L12 2Z" fill="#ff7b00" />
+                <path d="M4 15L12 22L20 15" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+
+            <motion.span
+              className="text-lg md:text-3xl font-semibold select-none"
+              initial={{ opacity: 0, x: -6 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              vyomgarud
+            </motion.span>
+          </div>
         </Link>
 
-        
+
         <nav className="hidden md:flex items-center gap-6 text-sm text-white/85 ">
-          {navbar.map((label, i) => (
-            <Link key={i} href={label.link} className="outline-none ">
-              <motion.p
-                custom={i}
-                initial="hidden"
-                animate="visible"
-                variants={navItemVariants}
-                className={`relative px-2 py-1 hover:text-white transition outline-none ${i===2 ? "text-red-500":""}`}
-              >
-                {label.text}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#ff7b00] transition-all group-hover:w-full" />
-              </motion.p>
-            </Link>
-          ))}
+          {navbar.map((label, i) => {
+            if (label.text === "Blog") {
+              return (
+                <Link key={i} href={label.link} className="outline-none">
+                  <motion.div
+                    custom={i}
+                    initial="hidden"
+                    animate="visible"
+                    variants={navItemVariants}
+                    className="relative flex top-0 items-center gap-2 px-2 py-1 hover:text-white transition"
+                  >
+                    {/* Blinking Dot */}
+                    <span className="relative flex size-3">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                      <span className="relative inline-flex size-3 rounded-full bg-red-300"></span>
+                    </span>
+
+                    {/* Blog Text */}
+                    <span className="font-semibold">{label.text}</span>
+
+                    {/* NEW Badge */}
+                    <span className="px-2 py-0.5 text-xs rounded-full bg-white text-black font-semibold">
+                      new
+                    </span>
+                  </motion.div>
+                </Link>
+              );
+            }
+
+            // DEFAULT NAV ITEMS
+            return (
+              <Link key={i} href={label.link} className="outline-none">
+                <motion.p
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  variants={navItemVariants}
+                  className="relative px-2 py-1 hover:text-white transition"
+                >
+                  {label.text}
+                </motion.p>
+              </Link>
+            );
+          })}
         </nav>
 
-      
+
+
         <div className="flex items-center gap-3">
           <motion.a
             href="#contact"
@@ -111,7 +142,7 @@ export default function Header() {
             <span>Get in touch</span>
           </motion.a>
 
-           
+
           <button
             onClick={() => setOpen((s) => !s)}
             aria-expanded={open}
@@ -135,7 +166,7 @@ export default function Header() {
           </button>
         </div>
 
- 
+
         <motion.div
           initial={{ opacity: 0, scale: 0.98, height: 0 }}
           animate={open ? { opacity: 1, scale: 1, height: "auto" } : { opacity: 0, scale: 0.98, height: 0 }}

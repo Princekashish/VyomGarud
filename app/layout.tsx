@@ -36,7 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${poppins.variable} ${inter.variable} ${montserrat.variable} antialiased  text-white bg-black`}
-        suppressHydrationWarning
+        suppressHydrationWarning 
       >
         <Header />
         {children}

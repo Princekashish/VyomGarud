@@ -1,14 +1,35 @@
-import { BLOG_POSTS } from '@/blog'
-import BlogHero from '@/components/BlogHero'
-import Categories from '@/components/Categories'
-export default function Blog() {
-    const categories = [...new Set(BLOG_POSTS.map(a => a.category))]
-    return (
-        <div>
-            <BlogHero />
-            {categories.map((cat) => (
-                <Categories key={cat} tilte={cat} />
-            ))}
-        </div>
-    )
+// app/blog/page.tsx
+import BlogClient from "@/components/BlogClient";
+
+const STRAPI = process.env.STRAPI_BASE_URL ?? "http://127.0.0.1:1337";
+const TOKEN = process.env.STRAPI_API_TOKEN;
+
+async function fetchPosts() {
+    const res = await fetch(`${STRAPI}/api/posts?populate=*`, {
+        headers: { Authorization: `Bearer ${TOKEN}` },
+        cache: "no-store",
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+    const json = await res.json();
+
+    // normalize posts
+    return (json.data || []).map((d: any) =>
+        d.attributes ? { id: d.id, ...d.attributes } : d
+    );
+}
+
+export default async function BlogPage() {
+    const posts = await fetchPosts();
+
+    // extract unique categories
+    const categories: string[] = Array.from(
+        new Set(
+            posts.map((p: any) =>
+                p.category?.name ? String(p.category.name) : "Uncategorized"
+            )
+        )
+    );
+
+    return <BlogClient posts={posts} categories={categories} />;
 }

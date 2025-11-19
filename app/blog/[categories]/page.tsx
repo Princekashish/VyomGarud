@@ -1,62 +1,67 @@
+// [categories]/page.tsx
 import AnimatedGrid, { SimplePost } from "@/components/AnimatedGrid";
-import { BLOG_POSTS } from "@/blog";
 
-type Props = { params?: { categories?: string } | Promise<{ categories?: string }> };
+type Props = {
+  params: {
+    categories: string; // this will be the slug from the URL
+  };
+};
+
+const STRAPI = process.env.STRAPI_BASE_URL ?? "http://127.0.0.1:1337";
+const TOKEN = process.env.STRAPI_API_TOKEN;
+
+async function fetchPosts() {
+  const res = await fetch(`${STRAPI}/api/posts?populate=*`, {
+    headers: { Authorization: `Bearer ${TOKEN}` },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(await res.text());
+  const json = await res.json();
+  return (json.data || []).map((d: any) =>
+    d.attributes ? { id: d.id, ...d.attributes } : d
+  );
+}
 
 function slugify(input = "") {
-  return String(input).trim().toLowerCase().replace(/\s+/g, "-").replace(/[^\w\-]+/g, "").replace(/\-\-+/g, "-");
+  return String(input)
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]/g, "")
+    .replace(/\-+/g, "-");
 }
 
 export default async function CategoryPage({ params }: Props) {
-  let resolvedParams: { categories?: string } | undefined;
-  if (params && typeof (params as any).then === "function") {
-    try {
-      resolvedParams = await params;
-    } catch {
-      resolvedParams = undefined;
-    }
-  } else {
-    resolvedParams = params as { categories?: string } | undefined;
-  }
+  const { categories: categorySlug } =await params; // this is the slug from URL
 
-  const rawSlug = resolvedParams?.categories ?? "";
-  if (!rawSlug) {
-    return (
-      <main className="max-w-7xl mx-auto p-6">
-        <h1 className="text-2xl font-bold">Category not specified</h1>
-      </main>
-    );
-  }
+  const posts = await fetchPosts();
 
-  const decoded = (() => {
-    try {
-      return decodeURIComponent(rawSlug);
-    } catch {
-      return rawSlug;
-    }
-  })();
+  // Find posts whose category slug matches the URL slug
+  const filtered = posts.filter(
+    (post: any) => slugify(post.category?.name) === categorySlug
+  );
 
-  const normalizedSlug = slugify(decoded);
-  const filtered = BLOG_POSTS.filter((p) => slugify(p.category) === normalizedSlug);
-  const pretty = filtered.length > 0 ? filtered[0].category : decoded.replace(/-/g, " ");
-  const clientPosts: SimplePost[] = filtered.map((p) => ({
+  // Map posts for AnimatedGrid
+  const clientPosts: SimplePost[] = filtered.map((p: any) => ({
     id: p.id,
     title: p.title,
     slug: p.slug,
-    excerpt: p.excerpt,
-    readTime: p.readTime,
-    author: p.author,
-    thumbnail: p.thumbnail,
-    category: normalizedSlug,
   }));
 
+  // Find the pretty category name for header
+  const prettyName = filtered[0]?.category?.name ?? categorySlug.replace(/-/g, " ");
+
   return (
-    <main className="w-5xl mx-auto p-6 ">
+    <main className="w-5xl mx-auto p-6">
       <header className="mb-6">
-        <h1 className="text-3xl font-bold">{pretty}</h1>
+        <h1 className="text-3xl font-bold">{prettyName}</h1>
       </header>
 
-      <AnimatedGrid posts={clientPosts} />
+      {clientPosts.length === 0 ? (
+        <p className="text-muted">No posts found for this category.</p>
+      ) : (
+        <AnimatedGrid posts={clientPosts} />
+      )}
     </main>
   );
 }

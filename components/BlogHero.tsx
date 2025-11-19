@@ -1,13 +1,10 @@
 // components/BlogHero.tsx
 "use client";
+
 import React, { useState } from "react";
 import { motion, Variants } from "framer-motion";
 
 type Props = {
-  /**
-   * Optional handler invoked when user submits a search.
-   * If not provided, the component will console.log the query.
-   */
   onSearch?: (q: string) => void;
 };
 
@@ -28,12 +25,11 @@ export default function BlogHero({ onSearch }: Props) {
   async function handleSubmit(e?: React.FormEvent) {
     if (e) e.preventDefault();
     if (!query.trim()) return;
+
     setSubmitting(true);
     try {
-      // call user handler or fallback
       if (onSearch) await Promise.resolve(onSearch(query.trim()));
       else console.log("Search:", query.trim());
-      // simulate small delay for UX
       await new Promise((r) => setTimeout(r, 400));
     } finally {
       setSubmitting(false);
@@ -48,22 +44,15 @@ export default function BlogHero({ onSearch }: Props) {
       variants={containerVariants}
     >
       <div className="max-w-5xl mx-auto text-center">
-        <motion.h1
-          variants={item}
-          className="font-extrabold text-[clamp(40px,7vw,96px)] leading-[0.95] tracking-tight"
-        >
+        <motion.h1 variants={item} className="font-extrabold text-[clamp(40px,7vw,96px)] leading-[0.95] tracking-tight">
           Blog
         </motion.h1>
 
-        <motion.p
-          variants={item}
-          className="mt-6 text-[clamp(16px,2.2vw,20px)] text-white/80 max-w-3xl mx-auto"
-        >
+        <motion.p variants={item} className="mt-6 text-[clamp(16px,2.2vw,20px)] text-white/80 max-w-3xl mx-auto">
           Want something to read with your coffee? Here you'll find technical writeups, product updates,
           engineering notes, and operational stories — all focused on UAV systems, autonomy and reliability.
         </motion.p>
 
-        {/* Search input */}
         <motion.form
           onSubmit={handleSubmit}
           variants={item}
@@ -71,13 +60,9 @@ export default function BlogHero({ onSearch }: Props) {
           role="search"
           aria-label="Search blog posts"
         >
-          <label htmlFor="blog-search" className="sr-only">
-            Search posts
-          </label>
-
+          <label htmlFor="blog-search" className="sr-only">Search posts</label>
           <div className="w-full max-w-3xl">
             <div className="relative">
-              {/* Icon */}
               <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-white/60">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -85,20 +70,16 @@ export default function BlogHero({ onSearch }: Props) {
                 </svg>
               </div>
 
-              {/* Input */}
               <input
                 id="blog-search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSubmit();
-                }}
+                onKeyDown={(e) => { if (e.key === "Enter") handleSubmit(); }}
                 placeholder="Enter what you are looking for"
                 aria-label="Search blog posts"
                 className="w-full rounded-xl bg-transparent border border-white/20 px-14 py-4 placeholder:text-white/50 text-white focus:outline-none focus:ring-2 focus:ring-[#ff7b00]/20 transition"
               />
 
-              {/* CTA */}
               <button
                 type="button"
                 onClick={() => handleSubmit()}
@@ -112,7 +93,6 @@ export default function BlogHero({ onSearch }: Props) {
           </div>
         </motion.form>
 
-        {/* small hint / keywords */}
         <motion.div variants={item} className="mt-6 text-sm text-white/50">
           Try: <span className="text-white/80">autonomy, flight-tests, sensor-fusion, case-studies</span>
         </motion.div>
