@@ -108,20 +108,15 @@ const SingleBlog = async ({ params }: Props) => {
     <article className="max-w-3xl mx-auto px-4 py-12">
       <header className="mb-8">
         <h1 className="text-5xl font-bold mb-4">{blog.title}</h1>
-        <p className="text-gray-500 mb-2">
-          {blog.author.name} • {blog.readTime}
+        <p className="text-white/90 mb-2">
+          {blog.author.name} <span className="text-white/50 pl-4"> {blog.readTime}</span>
         </p>
         <p className="text-xl text-gray-600">{blog.excerpt}</p>
-        {/* <div className="flex gap-2 mt-4">
-          <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-            {blog.category}
-          </span>
-        </div> */}
       </header>
 
       {blog.thumbnail && (
         <img
-          src={`${STRAPI}${blog.thumbnail.url}`} // make sure it's absolute
+          src={`${blog.thumbnail.url}`} // make sure it's absolute
           alt={blog.title}
           className="w-full rounded-lg mb-8 object-cover h-96"
         />

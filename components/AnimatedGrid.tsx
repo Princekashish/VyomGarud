@@ -12,7 +12,6 @@ export interface SimplePost {
   author: string;
   thumbnail: string;
   category: string;
-  categorySlug: string;  // <-- ADD THIS
 }
 
 
@@ -36,23 +35,12 @@ function slugify(input = "") {
     .replace(/\-+/g, "-");
 }
 
-/** Resolve thumbnail for client: allow full URL or relative path from Strapi */
-function resolveThumbnail(raw?: string | null) {
-  if (!raw) return "";
-  if (raw.startsWith("http://") || raw.startsWith("https://")) return raw;
-  const base = (process.env.NEXT_PUBLIC_STRAPI_BASE_URL || "").replace(/\/$/, "");
-  if (!base) return raw; // fallback (may 404 in dev if env not set)
-  return raw.startsWith("/") ? `${base}${raw}` : `${base}/${raw}`;
-}
 
 /** Local dev fallback image (optional) */
 const DEV_FALLBACK = "/placeholder-post.png";
 
 export default function AnimatedGrid({ posts }: { posts: SimplePost[] }) {
   const safePosts = Array.isArray(posts) ? posts : [];
-
-  console.log(safePosts,"cososos");
-  
 
   return (
     <motion.div
@@ -65,7 +53,6 @@ export default function AnimatedGrid({ posts }: { posts: SimplePost[] }) {
       {safePosts.map((p) => {
         const categorySlug = slugify(p.category ?? "");
         const href = `/blog/${categorySlug}/${encodeURIComponent(String(p.slug ?? ""))}`;
-        const imgUrl = resolveThumbnail(p.thumbnail) || DEV_FALLBACK;
 
         return (
           <motion.article
@@ -74,10 +61,9 @@ export default function AnimatedGrid({ posts }: { posts: SimplePost[] }) {
             whileHover={{ y: -8, scale: 1.02, boxShadow: "0 20px 50px rgba(2,6,23,0.55)" }}
             className="relative rounded-2xl overflow-hidden bg-linear-to-b from-[#0b0d0e] to-[#070809] border border-white/6 flex flex-col"
           >
-            {/* image area */}
-            <div className="h-44 md:h-48 w-full overflow-hidden flex-shrink-0">
+            <div className="h-44 md:h-48 w-full overflow-hidden shrink-0">
               <img
-                src={imgUrl}
+                src={p.thumbnail}
                 alt={p.title ?? "thumbnail"}
                 className="w-full h-full object-cover transform transition-transform duration-500 ease-out"
                 loading="lazy"
@@ -105,7 +91,7 @@ export default function AnimatedGrid({ posts }: { posts: SimplePost[] }) {
 
                 <Link
                   href={href}
-                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff7b00] text-black text-sm font-semibold"
+                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/30 text-white text-sm font-semibold"
                 >
                   Read
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="inline-block">

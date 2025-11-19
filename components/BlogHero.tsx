@@ -29,7 +29,6 @@ export default function BlogHero({ onSearch }: Props) {
     setSubmitting(true);
     try {
       if (onSearch) await Promise.resolve(onSearch(query.trim()));
-      else console.log("Search:", query.trim());
       await new Promise((r) => setTimeout(r, 400));
     } finally {
       setSubmitting(false);

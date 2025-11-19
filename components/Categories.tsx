@@ -69,6 +69,7 @@ export default function Categories({ title, posts, searchQuery }: CategoriesProp
         if (url.startsWith("http://") || url.startsWith("https://")) return url;
         return `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL?.replace(/\/$/, "")}${url.startsWith("/") ? "" : "/"}${url}`;
     }
+    
 
     return (
         <section className="w-full px-6 py-12">
