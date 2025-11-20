@@ -2,7 +2,7 @@ import { Heart, Share2 } from "lucide-react";
 
 type Props = {
   params: {
-    slug: string; 
+    slug: string;
   };
 };
 
@@ -77,6 +77,7 @@ const SingleBlog = async ({ params }: Props) => {
 
 
   function renderBlock(block: any, i: number) {
+
     const content = renderInline(block.children);
 
     switch (block.type) {
@@ -92,6 +93,16 @@ const SingleBlog = async ({ params }: Props) => {
           <h3 key={i} className="font-semibold text-2xl mt-8 mb-3">
             {content}
           </h3>
+        );
+
+      case "image":
+        return (
+          <img
+            key={i}
+            src={block.image?.url}
+            alt={block.image?.alternativeText || ""}
+            className="my-6 rounded-lg"
+          />
         );
 
       default:
@@ -116,7 +127,7 @@ const SingleBlog = async ({ params }: Props) => {
 
       {blog.thumbnail && (
         <img
-          src={`${blog.thumbnail.url}`} 
+          src={`${blog.thumbnail.url}`}
           alt={blog.title}
           className="w-full rounded-lg mb-8 object-cover h-96"
         />
@@ -130,7 +141,7 @@ const SingleBlog = async ({ params }: Props) => {
 
       <div className="px-5 py-4 bg-[#262626] rounded-2xl mt-5">
         <div className="flex gap-3 justify-between">
-          <div className="flex gap-1">
+          <div className="flex gap-1">  
             <Heart /> <h1>{`2`}+</h1>
           </div>
           <button
