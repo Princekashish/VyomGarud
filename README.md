@@ -43,7 +43,7 @@
 
 Before setting up VyomGarud locally, make sure you have the following installed:
 
-- **Node.js** (v20 or later) - [Download here](https://nodejs.org/)
+- **Node.js** (v24 or later) - [Download here](https://nodejs.org/)
 - **pnpm** - Install with `npm install -g pnpm` or [follow the official guide](https://pnpm.io/installation)
 - **Git** - [Download here](https://git-scm.com/)
 
@@ -98,5 +98,5 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see VyomG
 
 
 <div align="center">
-  <sub>Built with ❤️ by <a href="https://pricekashish.tech">Prince kashish</a></sub>
+  <sub>Built with ❤️ by <a href="https://www.princekashish.tech">Prince kashish</a></sub>
 </div>
