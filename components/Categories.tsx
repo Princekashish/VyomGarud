@@ -114,7 +114,7 @@ export default function Categories({ title, posts, searchQuery }: CategoriesProp
                                                 />
                                             </div>
                                         ) : (
-                                            <div className="h-44 md:h-48 w-full bg-gradient-to-r from-gray-800 to-gray-700" />
+                                            <div className="h-44 md:h-48 w-full bg-linear-to-r from-gray-800 to-gray-700" />
                                         )}
 
                                         <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent" />

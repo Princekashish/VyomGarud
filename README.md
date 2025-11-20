@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VyomGarud – UAV Systems Website + Blog Platform
 
-## Getting Started
+**VyomGarud** This project is a full-stack monolithic platform combining a high-performance Next.js frontend with a Strapi headless CMS backend
 
-First, run the development server:
+---
+
+## ✨ Features (Planned & In Progress)
+
+#### Full Blog Management (Strapi Admin)
+
+- [x] Create / Edit / Delete blog posts using Strapi admin panel **Secure API fetching**
+- [x] Upload images
+- [x] Rich text content with image and **multi text supports**
+
+#### Public Facing Blog (Next.js)
+
+- [x] Grid-based blog previews
+- [x] Animated category sections
+- [x] Animation on scroll (Framer Motion)
+- [x] SEO-friendly URLs 
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+/blog
+/blog/sensors
+/blog/sensors/real-time-sensor-fusion
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Strapi CMS (Backend)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Local Development Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Before setting up VyomGarud locally, make sure you have the following installed:
 
-## Deploy on Vercel
+- **Node.js** (v20 or later) - [Download here](https://nodejs.org/)
+- **pnpm** - Install with `npm install -g pnpm` or [follow the official guide](https://pnpm.io/installation)
+- **Git** - [Download here](https://git-scm.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 0. File structure 
+```bash
+app/
+ ├── blog/
+ │    ├── page.tsx
+ │    ├── [categories]/
+ │    │        └── page.tsx
+ │    └── [categories]/[slug]/
+ │             └── page.tsx
+components/
+
+```
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Princekashish/VyomGarud
+cd VyomGarud
+```
+
+### 2. Install Dependencies
+
+```bash
+pnpm install
+```
+
+### 3. Environment Configuration
+
+Copy the `.env.example` file to `.env` and fill in the values:
+
+```bash
+cp .env.example .env
+```
+
+### 4. Run the Development Server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see VyomGarud running locally! 🎉
+
+### 5. Available Scripts
+
+- `pnpm dev` - Start development server with Turbopack
+- `pnpm build` - Build the application for production
+- `pnpm start` - Start the production server
+
+
+<div align="center">
+  <sub>Built with ❤️ by <a href="https://pricekashish.tech">Prince kashish</a></sub>
+</div>
